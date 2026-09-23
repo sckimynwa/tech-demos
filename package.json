@@ -1,0 +1,8 @@
+{
+  "name": "tech-demos",
+  "private": true,
+  "description": "Sticky Bun monorepo for weekday X-bookmark tech demos. Each demo lives under apps/<slug>/.",
+  "scripts": {
+    "dev": "echo \"cd apps/<slug> && bun run dev\""
+  }
+}
