@@ -34,6 +34,13 @@
       "url": "https://x.com/0xMovez/status/2104216919033192746",
       "date": "2026-09-30",
       "slug": "motion-studio"
+    },
+    {
+      "id": "2103506859709858175",
+      "title": "Cerebras Inference + Pi harness (20x faster personal agent)",
+      "url": "https://x.com/cerebras/status/2103506859709858175",
+      "date": "2026-10-01",
+      "slug": "cerebras-fast-agent"
     }
   ],
   "built": [
