@@ -41,6 +41,13 @@
       "url": "https://x.com/cerebras/status/2103506859709858175",
       "date": "2026-10-01",
       "slug": "cerebras-fast-agent"
+    },
+    {
+      "id": "2103502079491023018",
+      "title": "Coinbase x402 (HTTP 402 agent micropayments)",
+      "url": "https://x.com/fednmad/status/2103502079491023018",
+      "date": "2026-10-02",
+      "slug": "x402-paywall"
     }
   ],
   "built": [
