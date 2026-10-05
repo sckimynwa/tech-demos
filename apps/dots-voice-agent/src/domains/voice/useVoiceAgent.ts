@@ -29,6 +29,7 @@ export function useVoiceAgent() {
   const [events, setEvents] = useState<TimelineEvent[]>([]);
   const sessionRef = useRef<VoiceSession | null>(null);
   const timersRef = useRef<number[]>([]);
+  const startingRef = useRef(false);
 
   const pushEvent = useCallback((event: Omit<TimelineEvent, "id" | "at">) => {
     setEvents((current) => [
@@ -122,6 +123,7 @@ export function useVoiceAgent() {
   const hangUp = useCallback(() => {
     sessionRef.current?.disconnect();
     sessionRef.current = null;
+    startingRef.current = false;
     setCallState("idle");
     setMicState("idle");
     pushEvent({
@@ -131,9 +133,14 @@ export function useVoiceAgent() {
   }, [pushEvent]);
 
   const startCall = useCallback(async () => {
-    if (callState === "live" || callState === "connecting") {
+    if (
+      startingRef.current ||
+      callState === "live" ||
+      callState === "connecting"
+    ) {
       return;
     }
+    startingRef.current = true;
     setError(null);
     setCallState("connecting");
     const handlers = {
@@ -160,6 +167,7 @@ export function useVoiceAgent() {
     try {
       await session.connect();
       setCallState("live");
+      startingRef.current = false;
       pushEvent({
         kind: "call",
         title:
@@ -178,6 +186,7 @@ export function useVoiceAgent() {
       setCallState("error");
       session.disconnect();
       sessionRef.current = null;
+      startingRef.current = false;
     }
   }, [callState, config.mode, enqueueTask, pushEvent]);
 

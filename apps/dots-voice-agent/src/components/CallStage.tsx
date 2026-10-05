@@ -47,7 +47,10 @@ export function CallStage({
 
       <DotBlob callState={callState} micState={micState} />
 
-      <p className="max-w-xl text-center text-lg leading-relaxed text-[#f6e6d8]">
+      <p
+        data-testid="caption"
+        className="max-w-xl text-center text-lg leading-relaxed text-[#f6e6d8]"
+      >
         {caption}
       </p>
 
@@ -56,25 +59,32 @@ export function CallStage({
       ) : null}
 
       <div className="flex items-center gap-3">
+        <Button
+          variant="call"
+          size="lg"
+          data-testid="start-call"
+          onClick={onStart}
+          disabled={isConnecting || isLive}
+          aria-pressed={isLive}
+        >
+          {isConnecting ? (
+            <LoaderCircle className="size-5 animate-spin" />
+          ) : (
+            <Phone className="size-5" />
+          )}
+          {isConnecting ? "Connecting" : isLive ? "On call" : "Start call"}
+        </Button>
         {isLive ? (
-          <Button variant="hangup" size="icon" onClick={onHangUp} aria-label="Hang up">
-            <PhoneOff className="size-6" />
-          </Button>
-        ) : (
           <Button
-            variant="call"
-            size="lg"
-            onClick={onStart}
-            disabled={isConnecting}
+            variant="ghost"
+            size="sm"
+            data-testid="hang-up"
+            onClick={onHangUp}
           >
-            {isConnecting ? (
-              <LoaderCircle className="size-5 animate-spin" />
-            ) : (
-              <Phone className="size-5" />
-            )}
-            {isConnecting ? "Connecting" : "Start call"}
+            <PhoneOff className="size-3.5" />
+            End
           </Button>
-        )}
+        ) : null}
       </div>
       <p className="max-w-sm text-center text-xs leading-5 text-[#f6e6d8]/45">
         Leave the call up. Speak (or type) work anytime. The agent queues

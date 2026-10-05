@@ -40,7 +40,7 @@ export function ActivityTimeline({ events, tasks }: ActivityTimelineProps) {
               Nothing queued yet. Start the call and speak a task.
             </p>
           ) : (
-            <ol className="space-y-2">
+            <ol data-testid="task-list" className="space-y-2">
               {tasks.map((task) => {
                 const Icon = taskIcon(task.kind);
                 return (

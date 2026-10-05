@@ -36,6 +36,7 @@ export function SpeakBar({ disabled, onSubmit }: SpeakBarProps) {
               key={sample.label}
               variant="chip"
               size="sm"
+              data-testid={`chip-${sample.label.toLowerCase().replace(/\s+/g, "-")}`}
               disabled={disabled}
               onClick={() => submit(sample.text)}
             >
@@ -45,6 +46,7 @@ export function SpeakBar({ disabled, onSubmit }: SpeakBarProps) {
         </div>
         <div className="flex gap-2">
           <input
+            data-testid="speak-input"
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
             disabled={disabled}
@@ -55,7 +57,11 @@ export function SpeakBar({ disabled, onSubmit }: SpeakBarProps) {
             }
             className="h-11 flex-1 rounded-full border border-white/10 bg-[#1b161d] px-4 text-sm text-[#f6e6d8] placeholder:text-white/30 focus:border-[#f4b183]/50 focus:outline-none"
           />
-          <Button type="submit" disabled={disabled || !draft.trim()}>
+          <Button
+            type="submit"
+            data-testid="speak-send"
+            disabled={disabled || !draft.trim()}
+          >
             Send
           </Button>
         </div>

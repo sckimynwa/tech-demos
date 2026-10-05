@@ -1,18 +1,17 @@
 import type { TaskKind } from "./types";
 
-const FILE_RE =
-  /\b(write|save|draft|note|notes|file|memo|standup|priorit)/i;
+const FILE_RE = /\b(write|save|draft|file|memo|priorit)/i;
 const SUMMARY_RE =
   /\b(summar(y|ize|ise)|recap|tldr|tl;dr|condense|digest)\b/i;
 const RESEARCH_RE =
   /\b(research|look up|lookup|search|investigate|find out|what is|compare|versus|vs\.?)\b/i;
 
 export function parseTaskKind(utterance: string): TaskKind {
-  if (FILE_RE.test(utterance)) {
-    return "file_write";
-  }
   if (SUMMARY_RE.test(utterance)) {
     return "summary";
+  }
+  if (FILE_RE.test(utterance)) {
+    return "file_write";
   }
   if (RESEARCH_RE.test(utterance)) {
     return "research";
