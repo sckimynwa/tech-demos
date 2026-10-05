@@ -42,7 +42,7 @@ export function PolicyEditor({
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <pre
           id="policy-gutter"
-          className="select-none overflow-hidden border-r border-line bg-black/20 px-2 py-3 text-right font-mono text-[11px] leading-5 text-muted/70 lg:min-h-0"
+          className="w-10 shrink-0 select-none overflow-hidden border-r border-line bg-black/20 px-2 py-3 text-right font-mono text-[12px] leading-5 text-muted/70 lg:min-h-0"
         >
           {Array.from({ length: lineCount }, (_, index) => index + 1).join("\n")}
         </pre>

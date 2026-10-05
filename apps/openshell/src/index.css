@@ -28,6 +28,8 @@ body {
     radial-gradient(900px 500px at 90% 0%, rgba(228, 193, 90, 0.05), transparent 45%),
     #070908;
   font-family: var(--font-sans);
+  font-kerning: normal;
+  letter-spacing: 0;
 }
 
 body::before {
