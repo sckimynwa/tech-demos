@@ -29,7 +29,7 @@ export function App() {
       <div className="relative mx-auto flex min-h-svh max-w-6xl flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
         <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-2">
-            <p className="font-mono text-[11px] tracking-[0.28em] text-amber-300/80 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.16em] text-amber-300/80 uppercase">
               tech-demos / cerebras-fast-agent
             </p>
             <h1 className="font-heading text-3xl tracking-tight md:text-4xl">

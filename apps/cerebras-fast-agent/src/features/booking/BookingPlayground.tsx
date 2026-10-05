@@ -37,7 +37,7 @@ export function BookingPlayground() {
       <Card className="border-0 bg-card/60">
         <CardContent className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl space-y-2">
-            <p className="font-mono text-[11px] tracking-[0.2em] text-amber-200/70 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-amber-200/70 uppercase">
               restaurant booking race
             </p>
             <h2 className="font-heading text-xl">Sequential vs parallel tool calls</h2>

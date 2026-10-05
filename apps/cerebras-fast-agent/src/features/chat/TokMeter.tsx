@@ -15,7 +15,7 @@ export function TokMeter({ meter, busy }: { meter: Meter; busy: boolean }) {
     <Card className="overflow-hidden border-0 bg-card/70 ring-amber-500/20">
       <CardContent className="space-y-5 pt-1">
         <div className="flex items-center justify-between">
-          <p className="font-mono text-[11px] tracking-[0.22em] text-amber-200/70 uppercase">
+          <p className="font-mono text-[11px] tracking-[0.14em] text-amber-200/70 uppercase">
             live tok/s
           </p>
           <Gauge className={`size-4 ${busy ? "animate-pulse text-amber-400" : "text-muted-foreground"}`} />

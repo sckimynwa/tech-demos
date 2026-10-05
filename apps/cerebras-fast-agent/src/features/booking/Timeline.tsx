@@ -24,7 +24,10 @@ export function Timeline({
   axisMs: number;
 }) {
   const widthMs = Math.max(axisMs, run.nowMs, 1);
-  const ticks = [0, 0.25, 0.5, 0.75, 1].map((fraction) => Math.round(widthMs * fraction));
+  const showTicks = widthMs >= 400;
+  const ticks = showTicks
+    ? [0, 0.25, 0.5, 0.75, 1].map((fraction) => Math.round(widthMs * fraction))
+    : [];
 
   return (
     <div className="space-y-3">
@@ -48,11 +51,13 @@ export function Timeline({
         </p>
       </div>
 
-      <div className="flex justify-between font-mono text-[10px] text-muted-foreground">
-        {ticks.map((tick) => (
-          <span key={tick}>{formatMs(tick)}</span>
-        ))}
-      </div>
+      {showTicks ? (
+        <div className="flex justify-between font-mono text-[10px] text-muted-foreground">
+          {ticks.map((tick) => (
+            <span key={tick}>{formatMs(tick)}</span>
+          ))}
+        </div>
+      ) : null}
 
       <div className="space-y-1.5">
         {run.spans.length === 0 ? (
@@ -65,8 +70,8 @@ export function Timeline({
             const left = (span.startMs / widthMs) * 100;
             const width = Math.max(1.6, ((end - span.startMs) / widthMs) * 100);
             return (
-              <div key={span.id} className="grid grid-cols-[140px_minmax(0,1fr)] items-center gap-2">
-                <p className="truncate font-mono text-[11px] text-muted-foreground">
+              <div key={span.id} className="grid grid-cols-[168px_minmax(0,1fr)] items-center gap-2">
+                <p className="truncate font-mono text-[11px] text-muted-foreground" title={span.detail ?? span.label}>
                   {span.label}
                 </p>
                 <div className="relative h-6 rounded-md bg-white/4 ring-1 ring-white/5">

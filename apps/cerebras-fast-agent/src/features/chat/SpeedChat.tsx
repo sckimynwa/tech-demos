@@ -24,7 +24,7 @@ export function SpeedChat() {
         <CardContent className="flex h-full min-h-[520px] flex-col gap-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-mono text-[11px] tracking-[0.2em] text-amber-200/70 uppercase">
+              <p className="font-mono text-[11px] tracking-[0.14em] text-amber-200/70 uppercase">
                 speed chat
               </p>
               <h2 className="font-heading text-xl">OpenAI-compatible stream</h2>
