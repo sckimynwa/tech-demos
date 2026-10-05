@@ -6,7 +6,7 @@ type PromptDockProps = {
   error: string | null
   onPrompt: (value: string) => void
   onGenerate: () => void
-  onSample: (prompt: string) => void
+  onSample: (prompt: string, sampleId: string) => void
 }
 
 export function PromptDock({
@@ -18,7 +18,7 @@ export function PromptDock({
   onSample,
 }: PromptDockProps) {
   return (
-    <aside className="flex flex-col gap-3 border-r border-line p-4">
+    <aside className="flex min-h-0 flex-col gap-3 overflow-hidden border-r border-line p-4">
       <div className="flex items-center justify-between">
         <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-mute">Prompt</h2>
         <span className="font-mono text-[10px] text-mute/70">one shot</span>
@@ -26,15 +26,15 @@ export function PromptDock({
       <textarea
         value={prompt}
         onChange={(event) => onPrompt(event.target.value)}
-        rows={8}
-        className="min-h-[180px] resize-none rounded-sm border border-line bg-panel px-3 py-2 font-sans text-[13px] leading-relaxed text-ink outline-none focus:border-accent/60"
+        rows={6}
+        className="h-[160px] resize-none rounded-sm border border-line bg-panel px-3 py-2 font-sans text-[13px] leading-relaxed text-ink outline-none focus:border-accent/60"
       />
       <div className="flex flex-wrap gap-1.5">
         {SAMPLE_PROMPTS.map((sample) => (
           <button
             key={sample.id}
             type="button"
-            onClick={() => onSample(sample.prompt)}
+            onClick={() => onSample(sample.prompt, sample.id)}
             className="rounded-sm border border-line px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute hover:border-accent hover:text-accent"
           >
             {sample.label}
@@ -50,7 +50,7 @@ export function PromptDock({
         {compiling ? 'Compiling…' : 'Generate scene'}
       </button>
       {error && <p className="font-mono text-[11px] text-red-400">{error}</p>}
-      <p className="mt-auto font-mono text-[10px] leading-relaxed text-mute/80">
+      <p className="font-mono text-[10px] leading-relaxed text-mute/80">
         No API key: built-in sample compiler. Optional{' '}
         <span className="text-ink/70">OPENAI_API_KEY</span> or{' '}
         <span className="text-ink/70">ANTHROPIC_API_KEY</span> in{' '}

@@ -1,15 +1,28 @@
+import { useEffect } from 'react'
 import { Inspector } from './components/Inspector.tsx'
 import { PreviewStage } from './components/PreviewStage.tsx'
 import { PromptDock } from './components/PromptDock.tsx'
-import { Timeline } from './components/Timeline.tsx'
 import { TopBar } from './components/TopBar.tsx'
 import { useStudio } from './hooks/useStudio.ts'
 
 export default function App() {
   const studio = useStudio()
 
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target
+      if (target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement) return
+      if (event.code === 'Space') {
+        event.preventDefault()
+        studio.player.toggle()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [studio.player])
+
   return (
-    <div className="grid h-dvh grid-rows-[52px_1fr_96px] bg-bg text-ink">
+    <div className="studio-shell overflow-hidden bg-bg text-ink">
       <TopBar
         source={studio.source}
         model={studio.model}
@@ -17,7 +30,7 @@ export default function App() {
         exportProgress={studio.exportProgress}
         onExport={studio.exportMp4}
       />
-      <div className="grid min-h-0 grid-cols-[300px_1fr_280px]">
+      <div className="grid min-h-0 grid-cols-[280px_minmax(0,1fr)_260px]">
         <PromptDock
           prompt={studio.prompt}
           compiling={studio.compiling}
@@ -30,6 +43,7 @@ export default function App() {
           scene={studio.scene}
           t={studio.player.t}
           playing={studio.player.playing}
+          onSeek={studio.player.setT}
           onToggle={studio.player.toggle}
         />
         <Inspector
@@ -38,7 +52,6 @@ export default function App() {
           exportError={studio.exportError}
         />
       </div>
-      <Timeline scene={studio.scene} t={studio.player.t} onSeek={studio.player.setT} />
     </div>
   )
 }

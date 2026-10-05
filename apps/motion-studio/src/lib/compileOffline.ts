@@ -94,10 +94,13 @@ function stampTitle(scene: Scene, title: string): void {
   }
 }
 
-export function compileOffline(prompt: string): CompileResult {
+export function compileOffline(prompt: string, sampleId?: string): CompileResult {
   const trimmed = prompt.trim()
   const brief = extractBrief(trimmed)
-  const id = pickSampleId(trimmed)
+  const id =
+    sampleId && sampleId in SAMPLE_BUILDERS
+      ? (sampleId as keyof typeof SAMPLE_BUILDERS)
+      : pickSampleId(trimmed)
   const builder = SAMPLE_BUILDERS[id]
   const title = brief.title
   const scene = applyBrief(builder(title), brief)

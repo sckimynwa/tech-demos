@@ -35,7 +35,7 @@ export const SAMPLE_PROMPTS = [
     id: 'launch',
     label: 'Product launch',
     prompt:
-      'Make a dynamic 7-second motion graphics video for Motion Studio, with the energy of a motion designer\'s showreel. Hook: TOO SLOW. One accent #d6ff3d.',
+      'Make a dynamic 7-second product launch film for Motion Studio. Hook: TOO SLOW. Assemble CAPTURE / SEEK(T) / ENCODE. One accent #d6ff3d.',
   },
   {
     id: 'beat',
@@ -53,6 +53,7 @@ export const SAMPLE_PROMPTS = [
 
 export function showreelScene(): Scene {
   const letters = ['M', 'O', 'T', 'I', 'O', 'N']
+  const letterPitch = 128
   const letterLayers: Layer[] = letters.map((ch, i) => {
     const at = 0.08 + i * 0.055
     return text({
@@ -60,14 +61,14 @@ export function showreelScene(): Scene {
       from: 0,
       to: 2.35,
       text: ch,
-      x: hold(210 + i * 145),
+      x: hold(SCENE_WIDTH / 2 + (i - (letters.length - 1) / 2) * letterPitch),
       y: step(at, 430, 352, SNAPPY_SPRING_K, SNAPPY_SPRING_D),
       scale: step(at, 0.42, 1, SNAPPY_SPRING_K, SNAPPY_SPRING_D),
       fontSize: 168,
       fontWeight: 700,
       font: 'display',
       fill: INK,
-      tracking: -4,
+      align: 'center',
     })
   })
 
@@ -114,9 +115,9 @@ export function showreelScene(): Scene {
         id: 'hook-rule',
         from: 0,
         to: 2.35,
-        x: step(0.28, 0, 210, 200, 24),
+        x: step(0.28, SCENE_WIDTH / 2, SCENE_WIDTH / 2 - 390, 200, 24),
         y: hold(448),
-        w: step(0.28, 0, 860, 200, 24),
+        w: step(0.28, 0, 780, 200, 24),
         h: 10,
         fill: ACCENT,
       },

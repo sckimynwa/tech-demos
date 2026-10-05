@@ -23,7 +23,7 @@ export function Inspector({ scene, t, exportError }: InspectorProps) {
   )
 
   return (
-    <aside className="flex min-w-0 flex-col gap-3 border-l border-line p-4">
+    <aside className="flex min-h-0 min-w-0 flex-col gap-3 overflow-hidden border-l border-line p-4">
       <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-mute">Scene</h2>
       <div className="grid grid-cols-2 gap-2 font-mono text-[11px] text-ink">
         <Meta label="id" value={scene.id} />

@@ -66,9 +66,9 @@ export function useStudio() {
   }, [applyCompile, prompt])
 
   const loadSample = useCallback(
-    (nextPrompt: string) => {
+    (nextPrompt: string, sampleId?: string) => {
       setPrompt(nextPrompt)
-      const result = compileOffline(nextPrompt)
+      const result = compileOffline(nextPrompt, sampleId)
       applyCompile(result)
     },
     [applyCompile],

@@ -16,6 +16,17 @@ html,
 body,
 #root {
   height: 100%;
+  overflow: hidden;
+}
+
+.studio-shell {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 52px minmax(0, 1fr);
+}
+
+.studio-shell > * {
+  min-height: 0;
 }
 
 body {
