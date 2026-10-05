@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardBody, CardHeader, CardTitle } from "@/components/ui/card";
 import type { WireFrame } from "@/lib/client";
+import { formatAtomicUsdc, shortenAddress } from "@/shared/x402";
 
 type WireInspectorProps = {
   frames: WireFrame[];
@@ -21,7 +22,7 @@ function JsonBlock({ value }: { value: unknown }) {
     return null;
   }
   return (
-    <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap break-all rounded-sm bg-paper p-3 font-mono text-[11px] leading-5 text-ink/90">
+    <pre className="mt-2 max-h-80 overflow-auto whitespace-pre-wrap break-all rounded-sm bg-paper p-3 font-mono text-[11px] leading-5 text-ink/90">
       {JSON.stringify(value, null, 2)}
     </pre>
   );
@@ -72,6 +73,14 @@ export function WireInspector({ frames }: WireInspectorProps) {
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-amber">
                   PAYMENT-REQUIRED
                 </p>
+                {frame.decoded.paymentRequired.accepts[0] ? (
+                  <p className="mt-2 font-mono text-[11px] text-amber">
+                    {frame.decoded.paymentRequired.accepts[0].scheme} ·{" "}
+                    {frame.decoded.paymentRequired.accepts[0].network} ·{" "}
+                    {formatAtomicUsdc(frame.decoded.paymentRequired.accepts[0].amount)} · payTo{" "}
+                    {shortenAddress(frame.decoded.paymentRequired.accepts[0].payTo)}
+                  </p>
+                ) : null}
                 <JsonBlock value={frame.decoded.paymentRequired} />
               </div>
             ) : null}
