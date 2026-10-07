@@ -23,8 +23,8 @@ export function MazeGrid({ snapshot }: MazeGridProps) {
             }
             className={cn(
               "flex size-9 items-center justify-center rounded-sm font-mono text-[11px] ring-1 ring-inset",
-              isWall && "bg-foreground/12 text-transparent ring-transparent",
-              unseen && "bg-muted/40 text-muted-foreground/40 ring-border/40",
+              isWall && "bg-foreground/28 text-transparent ring-transparent",
+              unseen && "bg-muted/30 text-muted-foreground/50 ring-border/50",
               !isWall &&
                 cell.discoveredAt !== null &&
                 !cell.onPath &&

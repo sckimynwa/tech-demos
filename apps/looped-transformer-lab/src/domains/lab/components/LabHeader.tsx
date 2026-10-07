@@ -9,7 +9,7 @@ export function LabHeader() {
           <Repeat2Icon className="size-5" />
           <p className="font-mono text-[11px] tracking-[0.22em] uppercase">Recurrent depth</p>
         </div>
-        <h1 className="font-heading text-2xl tracking-tight text-foreground sm:text-3xl">
+        <h1 className="font-heading text-2xl text-foreground sm:text-3xl">
           Looped Transformer Lab
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
