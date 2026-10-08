@@ -69,6 +69,13 @@
       "url": "https://x.com/yulmu_coffee/status/2107443394851328472",
       "date": "2026-10-07",
       "slug": "looped-transformer-lab"
+    },
+    {
+      "id": "2107519013790302307",
+      "title": "EmbeddingGemma 2 (740M natively multimodal on-device embeddings)",
+      "url": "https://x.com/yulmu_coffee/status/2107519013790302307",
+      "date": "2026-10-08",
+      "slug": "embeddinggemma2-local-rag"
     }
   ],
   "built": [
