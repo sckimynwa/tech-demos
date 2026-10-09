@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-sm: 0.4rem;
+  --radius-md: 0.7rem;
+  --radius-lg: 1rem;
+}
+
+:root {
+  --background: #100e0c;
+  --foreground: #f4ece2;
+  --card: #181410;
+  --card-foreground: #f4ece2;
+  --muted: #221c16;
+  --muted-foreground: #b3a496;
+  --border: #2d261e;
+  --input: #2d261e;
+  --primary: #f0a43a;
+  --primary-foreground: #1a1208;
+  --accent: #2a2118;
+  --accent-foreground: #f4ece2;
+  --ring: #f0a43a;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(240, 164, 58, 0.14), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(255, 92, 46, 0.08), transparent 46%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(240, 164, 58, 0.28);
+}
