@@ -20,6 +20,12 @@ Single-user playground that runs **Stagehand v4** against one public URL and sho
 - **Stagehand v4** (`@browserbasehq/stagehand` or current v4 package) — browser extract engine; local Chromium preferred for MVP
 - **Fable 5 cloud agent** — implementer
 
+## Implementation notes (as built)
+- Package: `@browserbasehq/stagehand@^4.1.0`. The v4 API is `localBrowser.launch()` → `Stagehand.create({ browser, model? })` → `browser.context.pages()`.
+- Branded Google Chrome rejects CDP `Extensions.loadUnpacked`, which v4 needs. The API auto-downloads **Chrome for Testing** via `@puppeteer/browsers` into `.browsers/`; `CHROME_PATH` overrides it.
+- No-key happy path: `page.evaluate` for text and links, plus `page.snapshot()` for the accessibility tree. `stagehand.extract(instruction)` runs only when an OpenAI, Anthropic, or Google key is set. Otherwise the UI shows a "skipped" notice.
+- Layout: `server/` (Bun.serve on 3001; `chrome.ts`, `model.ts`, `extract.ts`) and `src/domains/extract/` (React Query hooks and components). Vite proxies `/api`, and `bun run dev` runs both with `concurrently`.
+
 ## Deferred
 - Browserbase cloud credentials / hosted sessions
 - Jev / Kev decision-layer pairing
