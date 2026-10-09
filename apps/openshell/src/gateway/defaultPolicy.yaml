@@ -1,0 +1,89 @@
+version: 1
+
+# Static — locked at sandbox create. Changing these needs a new sandbox.
+filesystem_policy:
+  include_workdir: true
+  read_only:
+    - /usr
+    - /lib
+    - /proc
+    - /etc
+  read_write:
+    - /tmp
+    - /workspace
+
+landlock:
+  compatibility: best_effort
+
+process:
+  run_as_user: "1500"
+  run_as_group: "1500"
+
+# Dynamic — hot-reloadable on a running sandbox (Apply policy).
+network_policies:
+  github:
+    name: GitHub read-only
+    endpoints:
+      - host: api.github.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        access: read-only
+        credential_binding:
+          provider: github
+        deny_rules:
+          - method: "*"
+            path: /repos/*/keys
+    binaries:
+      - path: /usr/bin/curl
+
+  gcp_storage:
+    name: GCS with bound credentials
+    endpoints:
+      - host: storage.googleapis.com
+        port: 443
+        protocol: rest
+        access: full
+        credential_binding:
+          provider: work-gcp
+    binaries:
+      - path: /usr/bin/curl
+
+  slack_mcp:
+    name: Slack MCP
+    endpoints:
+      - host: mcp.slack.com
+        port: 443
+        path: /mcp
+        protocol: mcp
+        enforcement: enforce
+        mcp:
+          strict_tool_names: true
+        rules:
+          - allow:
+              method: initialize
+          - allow:
+              method: notifications/initialized
+          - allow:
+              method: tools/list
+          - allow:
+              method: tools/call
+              tool: search_messages
+        deny_rules:
+          - method: tools/call
+            tool: send_message
+    binaries:
+      - path: /usr/bin/python3
+
+  telemetry_audit:
+    name: telemetry (audit, not enforce)
+    endpoints:
+      - host: telemetry.internal
+        port: 443
+        protocol: rest
+        enforcement: audit
+        access: read-only
+    binaries:
+      - path: /usr/bin/curl
+
+network_middlewares: {}
