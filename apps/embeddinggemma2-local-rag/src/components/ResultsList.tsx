@@ -31,12 +31,45 @@ function preview(hit: SearchHit) {
 }
 
 export function ResultsList({ hits, activeId, onSelect, queryLabel }: Props) {
+  const topImage = hits.find((hit) => hit.item.modality === "image") ?? null
+
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
       <div className="text-xs text-muted-foreground">
         {queryLabel ? `Query: ${queryLabel}` : "No query yet"} · cosine of the
         active embedder (not fake)
+        {topImage
+          ? ` · top image ${topImage.item.title} (${topImage.score.toFixed(3)})`
+          : ""}
       </div>
+      {topImage ? (
+        <Card size="sm" className="ring-1 ring-sky-400/40">
+          <CardContent>
+            <button
+              type="button"
+              className="flex w-full items-center gap-3 text-left"
+              onClick={() => onSelect(topImage.item.id)}
+            >
+              <img
+                src={topImage.item.url}
+                alt={topImage.item.title}
+                className="size-14 rounded-md object-cover"
+              />
+              <div className="min-w-0">
+                <div className="text-xs text-muted-foreground">
+                  Top cross-modal image
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-medium">{topImage.item.title}</span>
+                  <span className="font-mono text-xs">
+                    {topImage.score.toFixed(3)}
+                  </span>
+                </div>
+              </div>
+            </button>
+          </CardContent>
+        </Card>
+      ) : null}
       <ScrollArea className="min-h-0 flex-1">
         <ol className="space-y-2 pr-2">
           {hits.map((hit, i) => (

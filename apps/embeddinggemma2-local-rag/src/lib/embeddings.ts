@@ -170,8 +170,12 @@ export async function loadClipFallback(
     isFallback: true,
     downloadHint: "Xenova/clip-vit-base-patch32 q8 — text+image only",
     note: "Fallback: CLIP text and image encoders share one space. Audio is excluded from ranking (not the same space). Scores are still real cosine.",
-    async embedText(text) {
-      const inputs = tokenizer([text], { padding: true, truncation: true })
+    async embedText(text, role, opts) {
+      const payload =
+        role === "query"
+          ? text
+          : [opts?.title, text].filter(Boolean).join(": ").slice(0, 160)
+      const inputs = tokenizer([payload], { padding: true, truncation: true })
       const { text_embeds } = await (
         textModel as unknown as (x: unknown) => Promise<{
           text_embeds: { data: ArrayLike<number>; dims: number[] }

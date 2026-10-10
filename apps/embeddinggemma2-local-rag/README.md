@@ -21,6 +21,7 @@ The banner is explicit: **REAL** or **FALLBACK**. If EmbeddingGemma 2 fails (Web
 
 - Scores are **real cosine similarity** of the active embedder. Nothing is faked.
 - In fallback, **audio is not scored** (it is not in CLIP space). Those items show `skip`.
+- CLIP text-text cosine runs hotter than text-image (typical CLIP). The matching image still wins among images; the UI calls out that top cross-modal hit.
 - Force fallback: `?fallback=1` or the **Use CLIP fallback** button while weights download.
 - Retry the real model with **Retry EmbeddingGemma 2**.
 
