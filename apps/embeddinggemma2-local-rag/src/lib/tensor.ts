@@ -17,3 +17,14 @@ export function tensorToVector(tensor: TensorLike): Float32Array {
 export function hasWebGPU(): boolean {
   return typeof navigator !== "undefined" && Boolean(navigator.gpu)
 }
+
+export async function canUseWebGPU(): Promise<boolean> {
+  try {
+    const gpu = navigator.gpu
+    if (!gpu) return false
+    const adapter = await gpu.requestAdapter()
+    return Boolean(adapter)
+  } catch {
+    return false
+  }
+}

@@ -34,7 +34,7 @@ export default function App() {
   const [status, setStatus] = useState("")
   const bootGen = useRef(0)
 
-  async function boot(forceFallback: boolean) {
+  async function boot(mode: "auto" | "fallback" | "primary") {
     const gen = ++bootGen.current
     setLoadingModel(true)
     setError(null)
@@ -46,7 +46,10 @@ export default function App() {
         (p) => {
           if (bootGen.current === gen) setProgress(p)
         },
-        { forceFallback },
+        {
+          forceFallback: mode === "fallback",
+          forcePrimary: mode === "primary",
+        },
       )
       if (bootGen.current !== gen) return
       setEmbedder(next)
@@ -84,7 +87,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    void boot(false)
+    void boot("auto")
     return () => {
       bootGen.current += 1
     }
@@ -193,8 +196,8 @@ export default function App() {
         loading={loadingModel}
         progress={progress}
         error={error}
-        onForceFallback={() => void boot(true)}
-        onRetryPrimary={() => void boot(false)}
+        onForceFallback={() => void boot("fallback")}
+        onRetryPrimary={() => void boot("primary")}
       />
 
       <main className="grid min-h-0 flex-1 gap-4 p-4 lg:grid-cols-[280px_minmax(0,1fr)_320px]">

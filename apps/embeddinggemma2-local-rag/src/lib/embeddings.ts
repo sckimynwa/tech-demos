@@ -6,7 +6,7 @@ import type {
   Modality,
   TextRole,
 } from "./types"
-import { hasWebGPU, tensorToVector } from "./tensor"
+import { canUseWebGPU, tensorToVector } from "./tensor"
 
 export const EG2_MODEL_ID = "onnx-community/embeddinggemma-2-ONNX"
 export const CLIP_MODEL_ID = "Xenova/clip-vit-base-patch32"
@@ -79,6 +79,7 @@ export async function loadEmbeddingGemma2(
     config,
     device,
     dtype: EG2_DTYPE,
+    session_options: device === "wasm" ? { executionProviders: ["wasm"] } : undefined,
     progress_callback: (info: Record<string, unknown>) => onProgress(onLoad, info),
   })
 
@@ -143,9 +144,11 @@ export async function loadClipFallback(
   const tokenizer = await AutoTokenizer.from_pretrained(CLIP_MODEL_ID, {
     progress_callback: (info: Record<string, unknown>) => onProgress(onLoad, info),
   })
+  const session_options = device === "wasm" ? { executionProviders: ["wasm"] } : undefined
   const textModel = await CLIPTextModelWithProjection.from_pretrained(CLIP_MODEL_ID, {
     device,
     dtype: "q8",
+    session_options,
     progress_callback: (info: Record<string, unknown>) => onProgress(onLoad, info),
   })
   const processor = await AutoProcessor.from_pretrained(CLIP_MODEL_ID, {
@@ -154,6 +157,7 @@ export async function loadClipFallback(
   const visionModel = await CLIPVisionModelWithProjection.from_pretrained(CLIP_MODEL_ID, {
     device,
     dtype: "q8",
+    session_options,
     progress_callback: (info: Record<string, unknown>) => onProgress(onLoad, info),
   })
 
@@ -195,10 +199,13 @@ export async function loadClipFallback(
 
 export async function loadBestEmbedder(
   onLoad?: (p: LoadProgress) => void,
-  options?: { forceFallback?: boolean },
+  options?: { forceFallback?: boolean; forcePrimary?: boolean },
 ): Promise<Embedder> {
-  const force = options?.forceFallback ?? wantsForcedFallback()
-  const gpu = hasWebGPU()
+  const force =
+    options?.forcePrimary === true
+      ? false
+      : Boolean(options?.forceFallback) || wantsForcedFallback()
+  const gpu = await canUseWebGPU()
   const primaryDevice: DeviceKind = gpu ? "webgpu" : "wasm"
   const fallbackDevice: DeviceKind = gpu ? "webgpu" : "wasm"
 
