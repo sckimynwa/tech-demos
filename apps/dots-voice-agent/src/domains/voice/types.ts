@@ -1,15 +1,45 @@
 import type { AgentTask, TaskKind } from "@/domains/queue/types";
 
-export type VoiceMode = "mock" | "realtime";
+export type VoiceMode = "mock" | "realtime" | "local";
 
 export type CallState = "idle" | "connecting" | "live" | "error";
 
 export type MicState = "idle" | "listening" | "speaking";
 
+export type RealtimeGuards = {
+  silenceSeconds: number;
+  maxSessionSeconds: number;
+};
+
+export type LocalSettings = {
+  sidecarUrl: string;
+  ollamaHost: string;
+  llmModel: string;
+  refine: boolean;
+};
+
+export type LocalStatus = {
+  stt: {
+    ready: boolean;
+    detail: string;
+    engine: string;
+  };
+  ollama: {
+    reachable: boolean;
+    modelPresent: boolean;
+    model: string;
+    detail: string;
+  };
+  refine: boolean;
+};
+
 export type SessionConfig = {
   mode: VoiceMode;
+  hasRealtimeKey: boolean;
   model: string;
   voice: string;
+  realtimeGuards: RealtimeGuards;
+  local: LocalSettings;
 };
 
 export type VoiceSessionHandlers = {

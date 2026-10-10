@@ -1,5 +1,7 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
+import { readJsonBody, sendJson } from "./httpUtil.ts";
+import { attachLocalApi, localSettings, realtimeGuards } from "./localApi.ts";
 
 const CLIENT_SECRET_URL = "https://api.openai.com/v1/realtime/client_secrets";
 const DEFAULT_REALTIME_MODEL = "gpt-realtime";
@@ -61,33 +63,6 @@ When they ask you to research, look something up, summarize, recap, write a note
 When you receive a [TASK COMPLETE] user message, speak that result FIRST before anything else.
 Lead with "Research done", "Summary ready", or "File written". Keep it spoken-friendly and tight.`;
 
-function readJsonBody(req: IncomingMessage): Promise<unknown> {
-  return new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    req.on("data", (chunk: Buffer) => {
-      chunks.push(chunk);
-    });
-    req.on("end", () => {
-      if (chunks.length === 0) {
-        resolve({});
-        return;
-      }
-      try {
-        resolve(JSON.parse(Buffer.concat(chunks).toString("utf8")));
-      } catch {
-        reject(new Error("invalid json"));
-      }
-    });
-    req.on("error", reject);
-  });
-}
-
-function sendJson(res: ServerResponse, status: number, body: unknown) {
-  res.statusCode = status;
-  res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify(body));
-}
-
 function hasApiKey(env: Record<string, string>) {
   return Boolean(env.OPENAI_API_KEY?.trim());
 }
@@ -98,8 +73,11 @@ async function handleConfig(
 ) {
   sendJson(res, 200, {
     mode: hasApiKey(env) ? "realtime" : "mock",
+    hasRealtimeKey: hasApiKey(env),
     model: env.OPENAI_REALTIME_MODEL?.trim() || DEFAULT_REALTIME_MODEL,
     voice: env.OPENAI_REALTIME_VOICE?.trim() || DEFAULT_REALTIME_VOICE,
+    realtimeGuards: realtimeGuards(env),
+    local: localSettings(env),
   });
 }
 
@@ -179,6 +157,7 @@ function attach(
     }
     next();
   });
+  attachLocalApi(middlewares, env);
 }
 
 export function realtimePlugin(env: Record<string, string>): Plugin {

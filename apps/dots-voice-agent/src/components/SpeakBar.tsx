@@ -1,13 +1,16 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { SAMPLE_UTTERANCES } from "@/lib/constants";
+import type { VoiceMode } from "@/domains/voice/types";
+import { SAMPLE_UTTERANCES, SAMPLE_UTTERANCES_KO } from "@/lib/constants";
 
 type SpeakBarProps = {
   disabled: boolean;
+  mode: VoiceMode;
   onSubmit: (text: string) => void;
 };
 
-export function SpeakBar({ disabled, onSubmit }: SpeakBarProps) {
+export function SpeakBar({ disabled, mode, onSubmit }: SpeakBarProps) {
+  const samples = mode === "local" ? SAMPLE_UTTERANCES_KO : SAMPLE_UTTERANCES;
   const [draft, setDraft] = useState("");
 
   const submit = (text: string) => {
@@ -31,7 +34,7 @@ export function SpeakBar({ disabled, onSubmit }: SpeakBarProps) {
         className="mx-auto flex max-w-4xl flex-col gap-3"
       >
         <div className="flex flex-wrap gap-2">
-          {SAMPLE_UTTERANCES.map((sample) => (
+          {samples.map((sample) => (
             <Button
               key={sample.label}
               variant="chip"

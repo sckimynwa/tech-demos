@@ -24,3 +24,23 @@ export const SAMPLE_UTTERANCES = [
     text: "Write a file with today's priorities: ship the voice demo, then queue two more tasks.",
   },
 ] as const;
+
+export const SAMPLE_UTTERANCES_KO = [
+  {
+    label: "조사",
+    text: "번과 노드 성능을 조사해서 끝나면 먼저 말해줘.",
+  },
+  {
+    label: "요약",
+    text: "지난주 스탠드업 노트를 요약해 줘. 나는 계속 말할게.",
+  },
+  {
+    label: "파일",
+    text: "오늘 우선순위를 파일로 적어 줘. 보이스 데모부터.",
+  },
+] as const;
+
+export const MODE_STORAGE_KEY = "dots-voice-mode";
+
+export const DEFAULT_SILENCE_S = 60;
+export const DEFAULT_MAX_SESSION_S = 600;

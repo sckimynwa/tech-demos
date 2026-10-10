@@ -35,6 +35,10 @@ Pattern only. Not a wrap of the Dots product (no public Dots API).
 - **OpenAI Realtime (GA)** — `POST /v1/realtime/client_secrets` + WebRTC `/v1/realtime/calls` when a key is set; no Agents SDK required for MVP
 - **Web Speech / SpeechSynthesis** — mock path so the demo works without keys or a Realtime quota
 
+## Follow-up — Local mode
+- In: Mock / Realtime / Local selector. Local = browser VAD → `moonshine-voice` Tiny Korean sidecar (non-streaming) → optional Qwen refine → Ollama `qwen3:8b` → `speechSynthesis` (`ko-KR`). Status UI never fakes STT. Realtime silence (60s) + max session (10 min) auto hang-up.
+- Out: streaming Korean ASR (not published), in-browser WASM STT as the primary engine, real tools.
+
 ## Deferred
 - `@openai/agents` RealtimeAgent wrapper
 - Real hosted web_search / Responses delegation

@@ -11,6 +11,8 @@ dist
 dist-ssr
 *.local
 .env
+sidecar/.venv
+sidecar/.cache
 
 # Editor
 .vscode/*
