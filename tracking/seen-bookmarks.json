@@ -97,6 +97,13 @@
       "url": "https://x.com/sexyguy/status/2109573760584151526",
       "date": "2026-10-14",
       "slug": "apfel-local-lab"
+    },
+    {
+      "id": "2110047081414987957",
+      "title": "Anthropic Scion (agent-scale in-house version control)",
+      "url": "https://x.com/AnthropicAI/status/2110047081414987957",
+      "date": "2026-10-15",
+      "slug": "scion-vcs-lab"
     }
   ],
   "built": [
