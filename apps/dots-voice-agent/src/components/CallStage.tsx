@@ -1,0 +1,120 @@
+import { LoaderCircle, Phone, PhoneOff } from "lucide-react";
+import { DotBlob } from "@/components/DotBlob";
+import { LocalStatus } from "@/components/LocalStatus";
+import { Button } from "@/components/ui/button";
+import type {
+  CallState,
+  LocalStatus as LocalStatusValue,
+  MicState,
+  VoiceMode,
+} from "@/domains/voice/types";
+
+type CallStageProps = {
+  mode: VoiceMode;
+  callState: CallState;
+  micState: MicState;
+  caption: string;
+  error: string | null;
+  runningCount: number;
+  guardLabel: string | null;
+  localStatus: LocalStatusValue | null;
+  onStart: () => void;
+  onHangUp: () => void;
+};
+
+export function CallStage({
+  mode,
+  callState,
+  micState,
+  caption,
+  error,
+  runningCount,
+  guardLabel,
+  localStatus,
+  onStart,
+  onHangUp,
+}: CallStageProps) {
+  const isLive = callState === "live";
+  const isConnecting = callState === "connecting";
+
+  return (
+    <section className="flex min-h-0 flex-1 flex-col items-center justify-center gap-8 px-6 py-10">
+      <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
+        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[#f6e6d8]/70">
+          {mode === "realtime"
+            ? "Realtime API"
+            : mode === "local"
+              ? "Local · Moonshine + Qwen"
+              : "Simulated path"}
+        </span>
+        {isLive ? (
+          <span className="rounded-full bg-[#3dcf8e]/15 px-3 py-1 text-[#7dffc0]">
+            Always-on call
+          </span>
+        ) : null}
+        {runningCount > 0 ? (
+          <span className="rounded-full bg-[#f4b183]/15 px-3 py-1 text-[#f4b183]">
+            {runningCount} in background
+          </span>
+        ) : null}
+        {mode === "realtime" && guardLabel ? (
+          <span
+            data-testid="realtime-guard"
+            className="rounded-full bg-white/6 px-3 py-1 text-white/50"
+          >
+            {guardLabel}
+          </span>
+        ) : null}
+      </div>
+
+      <DotBlob callState={callState} micState={micState} />
+
+      <p
+        data-testid="caption"
+        className="max-w-xl text-center text-lg leading-relaxed text-[#f6e6d8]"
+      >
+        {caption}
+      </p>
+
+      {mode === "local" ? <LocalStatus status={localStatus} /> : null}
+
+      {error ? (
+        <p className="max-w-md text-center text-sm text-[#ff8d8d]">{error}</p>
+      ) : null}
+
+      <div className="flex items-center gap-3">
+        <Button
+          variant="call"
+          size="lg"
+          data-testid="start-call"
+          onClick={onStart}
+          disabled={isConnecting || isLive}
+          aria-pressed={isLive}
+        >
+          {isConnecting ? (
+            <LoaderCircle className="size-5 animate-spin" />
+          ) : (
+            <Phone className="size-5" />
+          )}
+          {isConnecting ? "Connecting" : isLive ? "On call" : "Start call"}
+        </Button>
+        {isLive ? (
+          <Button
+            variant="ghost"
+            size="sm"
+            data-testid="hang-up"
+            onClick={onHangUp}
+          >
+            <PhoneOff className="size-3.5" />
+            End
+          </Button>
+        ) : null}
+      </div>
+      <p className="max-w-sm text-center text-xs leading-5 text-[#f6e6d8]/45">
+        Leave the call up. Speak (or type) work anytime. The agent queues
+        research, summaries, and file writes, then barges in and speaks the
+        result first.
+      </p>
+    </section>
+  );
+}
