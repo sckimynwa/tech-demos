@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  --color-ink: #e7f0e8;
+  --color-muted: #7f9384;
+  --color-line: #24332a;
+  --color-panel: #101612;
+  --color-panel-2: #0c110e;
+  --color-allow: #8fd14f;
+  --color-deny: #ff6b4a;
+  --color-audit: #e4c15a;
+  --color-accent: #76b900;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--color-ink);
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(118, 185, 0, 0.12), transparent 50%),
+    radial-gradient(900px 500px at 90% 0%, rgba(228, 193, 90, 0.05), transparent 45%),
+    #070908;
+  font-family: var(--font-sans);
+  font-kerning: normal;
+  letter-spacing: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(118, 185, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(118, 185, 0, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 75%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+textarea {
+  field-sizing: fixed;
+}
+
+.audit-row-enter {
+  animation: audit-in 180ms ease-out;
+}
+
+@keyframes audit-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
