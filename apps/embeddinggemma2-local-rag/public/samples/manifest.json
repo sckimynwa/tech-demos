@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "aurora",
+      "title": "Aurora notes",
+      "modality": "text",
+      "path": "/samples/notes/aurora.txt"
+    },
+    {
+      "id": "mars-note",
+      "title": "The Red Planet",
+      "modality": "text",
+      "path": "/samples/notes/mars.txt"
+    },
+    {
+      "id": "coffee-note",
+      "title": "Pour-over ritual",
+      "modality": "text",
+      "path": "/samples/notes/coffee.txt"
+    },
+    {
+      "id": "binary-search",
+      "title": "binary-search.ts",
+      "modality": "code",
+      "path": "/samples/code/binary-search.ts"
+    },
+    {
+      "id": "cats",
+      "title": "cats on a couch",
+      "modality": "image",
+      "path": "/samples/images/cats.jpg"
+    },
+    {
+      "id": "mars",
+      "title": "Mars",
+      "modality": "image",
+      "path": "/samples/images/mars.jpg"
+    },
+    {
+      "id": "turtle",
+      "title": "sea turtle",
+      "modality": "image",
+      "path": "/samples/images/turtle.jpg"
+    },
+    {
+      "id": "coffee",
+      "title": "pour-over coffee",
+      "modality": "image",
+      "path": "/samples/images/coffee.jpg"
+    },
+    {
+      "id": "jfk",
+      "title": "JFK inaugural excerpt",
+      "modality": "audio",
+      "path": "/samples/audio/jfk.wav"
+    }
+  ]
+}
