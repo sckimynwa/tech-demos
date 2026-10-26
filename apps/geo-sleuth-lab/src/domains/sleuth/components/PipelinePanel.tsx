@@ -113,9 +113,7 @@ export function PipelinePanel({
             </p>
             <Progress value={confidencePercent} className="mt-3">
               <ProgressLabel>Confidence</ProgressLabel>
-              <ProgressValue>
-                {(formatted) => (formatted == null ? "0%" : `${formatted}%`)}
-              </ProgressValue>
+              <ProgressValue />
             </Progress>
           </div>
         ) : null}
