@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Synthetic demo plate of the Colosseum from the southeast approach">
+  <rect width="640" height="400" fill="#f0e2cc"/>
+  <rect y="250" width="640" height="150" fill="#cbb892"/>
+  <ellipse cx="500" cy="210" rx="46" ry="70" fill="#3f6b45"/>
+  <ellipse cx="430" cy="230" rx="28" ry="48" fill="#2f5538"/>
+  <g transform="translate(70 70)">
+    <path d="M40 210 C40 80 460 70 480 200 L450 230 C420 130 90 130 70 220 Z" fill="#d8c4a2" stroke="#6b5438" stroke-width="6"/>
+    <g fill="#6b5438">
+      <rect x="90" y="150" width="22" height="36" rx="11"/>
+      <rect x="140" y="142" width="22" height="36" rx="11"/>
+      <rect x="190" y="138" width="22" height="36" rx="11"/>
+      <rect x="240" y="136" width="22" height="36" rx="11"/>
+      <rect x="290" y="138" width="22" height="36" rx="11"/>
+      <rect x="340" y="144" width="22" height="36" rx="11"/>
+      <rect x="390" y="154" width="22" height="36" rx="11"/>
+      <rect x="92" y="112" width="18" height="24" rx="9"/>
+      <rect x="142" y="104" width="18" height="24" rx="9"/>
+      <rect x="192" y="100" width="18" height="24" rx="9"/>
+      <rect x="242" y="98" width="18" height="24" rx="9"/>
+      <rect x="292" y="100" width="18" height="24" rx="9"/>
+      <rect x="342" y="106" width="18" height="24" rx="9"/>
+      <rect x="392" y="116" width="18" height="24" rx="9"/>
+    </g>
+  </g>
+  <text x="16" y="28" font-family="ui-monospace, monospace" font-size="13" fill="#1c1917">SYNTHETIC DEMO · PUBLIC LANDMARK</text>
+</svg>
