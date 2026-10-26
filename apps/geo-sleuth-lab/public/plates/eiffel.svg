@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Synthetic demo plate of the Eiffel Tower from the Champ de Mars">
+  <defs>
+    <linearGradient id="eiffel-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b7cfe4"/>
+      <stop offset="1" stop-color="#f4efe4"/>
+    </linearGradient>
+    <linearGradient id="eiffel-lawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7f9a5c"/>
+      <stop offset="1" stop-color="#3d5a34"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#eiffel-sky)"/>
+  <rect y="248" width="640" height="152" fill="url(#eiffel-lawn)"/>
+  <polygon points="320,248 286,400 354,400" fill="#c9bba6"/>
+  <g fill="none" stroke="#4a4036" stroke-width="3">
+    <polygon points="320,36 214,292 426,292"/>
+    <line x1="246" y1="210" x2="394" y2="210"/>
+    <line x1="270" y1="150" x2="370" y2="150"/>
+    <line x1="292" y1="104" x2="348" y2="104"/>
+    <line x1="250" y1="250" x2="390" y2="250"/>
+    <line x1="214" y1="292" x2="426" y2="292"/>
+    <line x1="262" y1="180" x2="320" y2="36"/>
+    <line x1="378" y1="180" x2="320" y2="36"/>
+    <line x1="236" y1="250" x2="292" y2="104"/>
+    <line x1="404" y1="250" x2="348" y2="104"/>
+  </g>
+  <rect x="312" y="18" width="16" height="22" fill="#4a4036"/>
+  <text x="16" y="28" font-family="ui-monospace, monospace" font-size="13" fill="#1c1917">SYNTHETIC DEMO · PUBLIC LANDMARK</text>
+</svg>

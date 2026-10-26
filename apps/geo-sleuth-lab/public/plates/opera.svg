@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Synthetic demo plate of the Sydney Opera House from Circular Quay">
+  <defs>
+    <linearGradient id="opera-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8eb4d4"/>
+      <stop offset="1" stop-color="#d5e4ef"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#opera-sky)"/>
+  <rect y="230" width="640" height="170" fill="#4e86a3"/>
+  <path d="M0 250 C80 236 140 246 200 240 L200 270 L0 278 Z" fill="#d7c7a4"/>
+  <path d="M150 230 C190 120 250 110 290 220 C250 150 200 150 170 220 Z" fill="#f7f4ee"/>
+  <path d="M250 228 C300 90 370 80 410 214 C360 130 300 140 270 220 Z" fill="#fbfaf6"/>
+  <path d="M360 226 C410 120 470 130 500 220 C450 160 400 160 380 222 Z" fill="#f3efe6"/>
+  <path d="M120 248 C200 240 360 236 520 250" fill="none" stroke="#dbe7ee" stroke-width="3" opacity="0.8"/>
+  <text x="16" y="28" font-family="ui-monospace, monospace" font-size="13" fill="#1c1917">SYNTHETIC DEMO · PUBLIC LANDMARK</text>
+</svg>
