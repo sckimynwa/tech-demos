@@ -1,0 +1,16 @@
+{
+  "Acme - Prod/shop.openai": {
+    "fields": {
+      "credential": "sk-proj-FAKEOLDKEY0001demoNOTREAL-wxyz"
+    },
+    "previous": {},
+    "state": {}
+  },
+  "Acme - Admin/rekey.openai-admin": {
+    "fields": {
+      "credential": "sk-admin-FAKE-NOT-A-REAL-OPENAI-ADMIN-KEY"
+    },
+    "previous": {},
+    "state": {}
+  }
+}
